@@ -21,3 +21,23 @@ Before creating your pull request, consider the following:
 
 After making these considerations, go ahead and submit your PR.  We'll review it and, if appropriate, we'll merge it,
 increment the version, and make a release!
+
+## Building
+
+To build and test reeds and all of its subprojects,
+
+```
+sbt test
+```
+
+To run the coverage report:
+
+```
+sbt clean coverage test && sbt coverageAggregate
+```
+
+To build and test only a single subproject:
+
+```
+sbt "project reeds-shapeless" test
+```
