@@ -1,4 +1,6 @@
-# Reeds [![Build Status](https://travis-ci.com/Acornsgrow/reeds.svg?token=YBfF1eSQ3q7xjqPgpdEw&branch=master)](https://travis-ci.com/Acornsgrow/reeds)
+# Reeds 
+[![Build Status](https://travis-ci.com/Acornsgrow/reeds.svg?token=YBfF1eSQ3q7xjqPgpdEw&branch=master)](https://travis-ci.com/Acornsgrow/reeds)
+[![Coverage Status](https://coveralls.io/repos/github/Acornsgrow/reeds/badge.svg?branch=develop)](https://coveralls.io/github/Acornsgrow/reeds?branch=develop)
 
 Reeds is a small Scala library with one goal: provide a standard `Reads[T]` typeclass and standard instances for it.
 
