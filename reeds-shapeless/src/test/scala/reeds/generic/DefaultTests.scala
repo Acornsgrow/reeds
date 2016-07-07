@@ -7,6 +7,7 @@ import cats.data.Validated.{Invalid, Valid}
 import cats.data._
 import cats.std.list._
 import org.scalatest.{FeatureSpec, GivenWhenThen}
+import shapeless.Default
 
 object Defaults {
   val uuid = UUID.fromString("beefdead-beef-beef-dead-beefbeefdead")
@@ -50,7 +51,6 @@ class DefaultTests extends FeatureSpec with GivenWhenThen {
     LocalDate.parse(validLocalDate),
     validInt.toInt
   )
-
 
   feature("Generic with defaults from string map with a missing default field") {
 
