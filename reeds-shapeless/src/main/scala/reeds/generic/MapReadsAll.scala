@@ -2,8 +2,8 @@ package reeds.generic
 
 import cats.data.{Validated, ValidatedNel}
 import cats.syntax.traverse._
-import cats.std.option._
-import cats.std.list._
+import cats.instances.option._
+import cats.instances.list._
 import Validated._
 import cats.{Functor, Traverse}
 import reeds.{FReads, Reads}

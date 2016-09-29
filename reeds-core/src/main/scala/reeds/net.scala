@@ -4,7 +4,7 @@ import java.net.{InetSocketAddress, URI, URL}
 
 import cats.data._
 import Validated._
-import cats.std.list._
+import cats.instances.list._
 import cats.syntax.functor._
 
 trait net {

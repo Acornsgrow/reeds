@@ -3,7 +3,7 @@ package reeds.generic
 import cats.Traverse
 import cats.data.{Validated, ValidatedNel}
 import cats.syntax.traverse._
-import cats.std.list._
+import cats.instances.list._
 import reeds.{FReads, Reads}
 import shapeless._
 import shapeless.ops.hlist.IsHCons

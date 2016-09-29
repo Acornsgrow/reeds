@@ -9,7 +9,7 @@ import org.scalatest.{FeatureSpec, GivenWhenThen}
 import reeds.Reads
 import shapeless._
 import shapeless.ops.hlist.RightFolder
-import cats.std.list._
+import cats.instances.list._
 import shapeless.labelled.FieldType
 import shapeless.record._
 
@@ -58,7 +58,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
 
       Then("result should be invalid")
       assert(result == Invalid(
-        NonEmptyList(
+        NonEmptyList.of(
           WrongArity(3, 1))))
     }
 
@@ -71,7 +71,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
 
       Then("result should be invalid")
       assert(result == Invalid(
-        NonEmptyList(
+        NonEmptyList.of(
           WrongArity(3, 4))))
     }
 
@@ -86,7 +86,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("errors should be aggregated")
-      val errors = result.toXor.swap.toOption.get.unwrap
+      val errors = result.toXor.swap.toOption.get.toList
       assert(errors.length == 2)
       assert(errors exists (err => err.getMessage == "'not a valid UUID' is not a valid UUID."))
       assert(errors exists (_.isInstanceOf[java.lang.NumberFormatException]))
@@ -118,7 +118,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("errors should be aggregated")
-      val errors = result.toXor.swap.toOption.get.unwrap
+      val errors = result.toXor.swap.toOption.get.toList
       assert(errors.length == 2)
       assert(errors exists (_.getMessage == "Missing non-optional field 'date'"))
       assert(errors exists (_.getMessage == "Missing non-optional field 'id'"))
@@ -135,7 +135,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("errors should be aggregated")
-      val errors = result.toXor.swap.toOption.get.unwrap
+      val errors = result.toXor.swap.toOption.get.toList
       assert(errors.length == 3)
     }
 
@@ -293,7 +293,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
       val result = invalidMap.readMap[SampleWithFunctor]
 
       Then("result should be invalid")
-      assert(result == Invalid(NonEmptyList(WrongFieldArity("uuid", 1, 2))))
+      assert(result == Invalid(NonEmptyList.of(WrongFieldArity("uuid", 1, 2))))
     }
 
     scenario("list map with empty values") {
@@ -304,7 +304,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
       val result = invalidMap.readMap[SampleWithFunctor]
 
       Then("result should be invalid")
-      assert(result == Invalid(NonEmptyList(WrongFieldArity("uuid", 1, 0))))
+      assert(result == Invalid(NonEmptyList.of(WrongFieldArity("uuid", 1, 0))))
     }
 
     scenario("list map with optional functor") {

@@ -1,9 +1,8 @@
 package reeds
 
-import cats.data.{Validated, ValidatedNel}
-import cats.std.list._
-import Validated._
-import cats.Functor
+import cats.data.{Validated, ValidatedNel}, Validated._
+import cats.instances.list._
+import cats.syntax.all._
 import shapeless._
 import shapeless.labelled._
 import shapeless.ops.hlist.{Comapped, Length, LiftAll, Mapped, RightFolder, ToTraversable, ZipWithKeys}
