@@ -4,18 +4,18 @@ Because reeds intends to be a go-to implementation of `Reads`, we welcome contri
 instance included, simply create a pull request that includes your instance(s).
 
 Before creating your pull request, consider the following:
-1. Are the instances for types which are in the Java or Scala standard library?
+* Are the instances for types which are in the Java or Scala standard library?
    * **Yes**: Include them in `reeds-core`, organized into packages reflecting their package in the standard library.
    * **No**: Does a reeds submodule already exist for the library which contains the types?
       * **Yes**: Include them in the existing submodule.
       * **No**: Is the library that contains the types open source and in wide use?
          * **Yes**: Create a new submodule for the instances
          * **No**: Consider releasing the instances as a separate project for the time being.
-2. Is there a well-agreed-upon standard way in which the types should be parsed from a string?
+* Is there a well-agreed-upon standard way in which the types should be parsed from a string?
    * **Yes**: Perfect!
    * **No**: Reeds doesn't want to be opinionated about its instances.  Go ahead and submit your PR, but don't
      add the instances to the `Reads` companion object; instead, they should be explicitly imported.
-3. Have you written tests which cover your instances completely?
+* Have you written tests which cover your instances completely?
    * **Yes**: Perfect!
    * **No**: You need to write tests for the instances before submitting your PR.
 
