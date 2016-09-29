@@ -4,7 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [1.0.5] = 2016-07-01
+## [1.0.7] - 2016-09-29
+- Cats to 0.7.2
+- Circe to 0.5.2
+
+## [1.0.6] - 2016-07-07
+- Instance priority adjustment
+
+## [1.0.5] - 2016-07-01
 - Cats to 0.6.0
 - Circe to 0.5.0-M2
 

@@ -5,7 +5,7 @@ import java.util.UUID
 
 import cats.data.Validated.{Invalid, Valid}
 import cats.data._
-import cats.std.list._
+import cats.instances.list._
 import org.scalatest.{FeatureSpec, GivenWhenThen}
 import shapeless.Default
 
@@ -76,8 +76,8 @@ class DefaultTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("only the field without a default should be reported as an error")
-      val errors = result.toXor.swap.toOption.get.unwrap
-      assert(errors == List(MissingField("id")))
+      val errors = result.toXor.swap.toOption.get
+      assert(errors == NonEmptyList.of(MissingField("id")))
     }
 
     scenario("map with invalid values, including for default fields") {
@@ -91,7 +91,7 @@ class DefaultTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("errors should be aggregated")
-      val errors = result.toXor.swap.toOption.get.unwrap
+      val errors = result.toXor.swap.toOption.get.toList
       assert(errors.length == 3)
     }
 
@@ -228,7 +228,7 @@ class DefaultTests extends FeatureSpec with GivenWhenThen {
       val result = invalidMap.readMap[DefaultSampleWithFunctor]
 
       Then("result should be invalid")
-      assert(result == Invalid(NonEmptyList(WrongFieldArity("uuid", 1, 2))))
+      assert(result == Invalid(NonEmptyList.of(WrongFieldArity("uuid", 1, 2))))
     }
 
     scenario("list map with empty values for a field with default") {
@@ -239,7 +239,7 @@ class DefaultTests extends FeatureSpec with GivenWhenThen {
       val result = invalidMap.readMap[DefaultSampleWithFunctor]
 
       Then("result should be invalid")
-      assert(result == Invalid(NonEmptyList(WrongFieldArity("uuid", 1, 0))))
+      assert(result == Invalid(NonEmptyList.of(WrongFieldArity("uuid", 1, 0))))
     }
 
     scenario("list map with optional functor with default Some") {

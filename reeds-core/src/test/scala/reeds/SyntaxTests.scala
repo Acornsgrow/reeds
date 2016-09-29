@@ -1,7 +1,7 @@
 package reeds
 
 import cats.data.Validated.Valid
-import cats.std.list._
+import cats.instances.list._
 import org.scalatest.FreeSpec
 
 
