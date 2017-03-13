@@ -1,9 +1,9 @@
 package reeds
 
 import cats.data.Validated.Valid
+import cats.syntax.either._
 import org.scalacheck.{Arbitrary, Gen}
 import Arbitrary.arbitrary
-import cats.data.Xor
 import org.scalatest.FreeSpec
 import org.scalatest.prop.{PropertyChecks, TableDrivenPropertyChecks}
 
@@ -21,7 +21,7 @@ class MathTests extends FreeSpec with PropertyChecks with TableDrivenPropertyChe
     "reads BigDecimals" in {
       forAll(arbitrary[BigDecimal]) {
         t =>
-          val str = Xor.catchNonFatal(t.bigDecimal.toPlainString)
+          val str = Either.catchNonFatal(t.bigDecimal.toPlainString)
           str foreach (s => assert(subject(s) == Valid(t)))
       }
     }
@@ -35,7 +35,7 @@ class MathTests extends FreeSpec with PropertyChecks with TableDrivenPropertyChe
     "reads BigInts" in {
       forAll(arbitrary[BigInt]) {
         t =>
-          val str = Xor.catchNonFatal(t.toString)
+          val str = Either.catchNonFatal(t.toString)
           str foreach (s => assert(subject(s) == Valid(t)))
       }
     }

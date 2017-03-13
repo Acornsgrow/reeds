@@ -1,5 +1,6 @@
 package reeds
 
+import cats.syntax.either._
 import io.circe.{Decoder, DecodingFailure, HCursor, export}, export.Exported
 
 package object circe {
@@ -13,7 +14,7 @@ package object circe {
       cursor => Decoder.decodeString(cursor) flatMap {
         str => reads(str).leftMap {
           failure => DecodingFailure(failure.head.getMessage, cursor.history)
-        }.toXor
+        }.toEither
       }
     }
   }

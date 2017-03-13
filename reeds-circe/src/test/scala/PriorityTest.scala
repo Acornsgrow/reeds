@@ -1,7 +1,7 @@
 import java.time.OffsetDateTime
 import java.util.UUID
 
-import cats.data.Xor
+import cats.syntax.either._
 import reeds.circe._
 import io.circe._
 import org.scalatest.FlatSpec
@@ -13,7 +13,7 @@ class PriorityTest extends FlatSpec {
     val decoder = implicitly[Decoder[OffsetDateTime]]
     val dt = OffsetDateTime.now()
     val json = Json.fromString(dt.toString)
-    assert(decoder.apply(json.hcursor) == Xor.Right(dt))
+    assert(decoder.apply(json.hcursor) == Right(dt))
     val result = decoder.apply(Json.fromString("not a uuid").hcursor)
     assert(result.isLeft)
     result.leftMap { err =>
@@ -29,7 +29,7 @@ class PriorityTest extends FlatSpec {
   "reedsToDecoder" should "convert a reads instance to a circe decoder" in {
     val decoder = implicitly[Reads[UUID]].toDecoder
     val json = Json.fromString("deadbeef-dead-dead-beef-deaddeadbeef")
-    assert(decoder.apply(json.hcursor) == Xor.Right(UUID.fromString("deadbeef-dead-dead-beef-deaddeadbeef")))
+    assert(decoder.apply(json.hcursor) == Right(UUID.fromString("deadbeef-dead-dead-beef-deaddeadbeef")))
   }
 
 }
