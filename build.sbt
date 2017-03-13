@@ -1,13 +1,14 @@
 name := "reeds"
 organization in ThisBuild := "com.acorns"
-version in ThisBuild := "1.0.7"
+version in ThisBuild := "1.0.8"
 
 scalaVersion in ThisBuild := "2.11.8"
+crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.1")
 
 libraryDependencies in ThisBuild ++= Seq(
-  "org.typelevel" %% "cats-jvm" % "0.7.2",
-  "org.scalatest" %% "scalatest" % "3.0.0" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.13.2" % "test"
+  "org.typelevel" %% "cats-jvm" % "0.9.0",
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
+  "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
 )
 
 

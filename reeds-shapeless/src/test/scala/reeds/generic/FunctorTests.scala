@@ -86,7 +86,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("errors should be aggregated")
-      val errors = result.toXor.swap.toOption.get.toList
+      val errors = result.swap.toOption.getOrElse(fail("no failure")).toList
       assert(errors.length == 2)
       assert(errors exists (err => err.getMessage == "'not a valid UUID' is not a valid UUID."))
       assert(errors exists (_.isInstanceOf[java.lang.NumberFormatException]))
@@ -118,7 +118,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("errors should be aggregated")
-      val errors = result.toXor.swap.toOption.get.toList
+      val errors = result.swap.getOrElse(fail("no failure")).toList
       assert(errors.length == 2)
       assert(errors exists (_.getMessage == "Missing non-optional field 'date'"))
       assert(errors exists (_.getMessage == "Missing non-optional field 'id'"))
@@ -135,7 +135,7 @@ class FunctorTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("errors should be aggregated")
-      val errors = result.toXor.swap.toOption.get.toList
+      val errors = result.swap.getOrElse(fail("no failure")).toList
       assert(errors.length == 3)
     }
 

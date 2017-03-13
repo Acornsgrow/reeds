@@ -4,6 +4,7 @@ language: scala
 
 scala:
    - 2.11.8
+   - 2.12.1
 
 jdk:
    - oraclejdk8
@@ -14,7 +15,7 @@ cache:
     - $HOME/.sbt/boot/
 
 script:
-  - sbt clean coverage test coverageReport && sbt coverageAggregate
+  - sbt clean coverage +test coverageReport && sbt coverageAggregate
 
 after_success:
   - sbt coveralls

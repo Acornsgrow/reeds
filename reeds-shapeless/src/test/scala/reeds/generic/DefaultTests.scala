@@ -6,6 +6,7 @@ import java.util.UUID
 import cats.data.Validated.{Invalid, Valid}
 import cats.data._
 import cats.instances.list._
+import cats.syntax.either._
 import org.scalatest.{FeatureSpec, GivenWhenThen}
 import shapeless.Default
 
@@ -76,7 +77,7 @@ class DefaultTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("only the field without a default should be reported as an error")
-      val errors = result.toXor.swap.toOption.get
+      val errors = result.swap.getOrElse(fail("no failure"))
       assert(errors == NonEmptyList.of(MissingField("id")))
     }
 
@@ -91,7 +92,7 @@ class DefaultTests extends FeatureSpec with GivenWhenThen {
       assert(result.isInvalid)
 
       And("errors should be aggregated")
-      val errors = result.toXor.swap.toOption.get.toList
+      val errors = result.swap.getOrElse(fail("no failure")).toList
       assert(errors.length == 3)
     }
 
